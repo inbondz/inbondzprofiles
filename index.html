@@ -1,4 +1,4 @@
-tml>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,278 +7,647 @@ tml>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
+    :root{
+      --bg1:#050507;
+      --bg2:#0b1020;
+      --bg3:#07040d;
+
+      --card: rgba(255,255,255,0.08);
+      --card2: rgba(10,10,16,0.86);
+
+      --stroke: rgba(255,255,255,0.18);
+      --stroke2: rgba(255,255,255,0.12);
+
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+
+      --cyan:#00d4ff;
+      --magenta:#ff00ea;
     }
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: radial-gradient(circle at top left, #00d4ff 0%, transparent 35%),
-                  radial-gradient(circle at bottom right, #ff00ea 0%, transparent 35%),
-                  linear-gradient(120deg, #050507 0%, #0b1020 55%, #07040d 100%);
-      overflow: hidden;
-      color: white;
-      padding: 20px;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Poppins", sans-serif;
     }
 
-    /* background animated particles glow */
-    .glow {
-      position: absolute;
-      width: 550px;
-      height: 550px;
-      border-radius: 50%;
-      filter: blur(90px);
-      opacity: 0.4;
-      animation: floatGlow 6s ease-in-out infinite;
-      z-index: 0;
+    body{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(0,212,255,0.30) 0%, transparent 40%),
+        radial-gradient(circle at bottom right, rgba(255,0,234,0.26) 0%, transparent 40%),
+        linear-gradient(120deg, var(--bg1) 0%, var(--bg2) 55%, var(--bg3) 100%);
+      color:var(--text);
+      overflow-x:hidden;
     }
 
-    .glow.one {
-      background: #00d4ff;
-      top: -200px;
-      left: -200px;
+    .grid-bg{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      pointer-events:none;
+      opacity:0.16;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.16) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1), rgba(0,0,0,0));
+      -webkit-mask-image: radial-gradient(circle at 50% 40%, rgba(0,0,0,1), rgba(0,0,0,0));
+      animation: gridMove 12s linear infinite;
     }
 
-    .glow.two {
-      background: #ff00ea;
-      bottom: -220px;
-      right: -220px;
-      animation-delay: 1.5s;
+    @keyframes gridMove{
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(42px); }
     }
 
-    @keyframes floatGlow {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(25px) scale(1.05); }
+    .glow{
+      position:fixed;
+      width:560px;
+      height:560px;
+      border-radius:50%;
+      filter:blur(95px);
+      opacity:0.33;
+      z-index:0;
+      pointer-events:none;
+      animation: floatGlow 7s ease-in-out infinite;
     }
 
-    /* main card */
-    .card {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 720px;
-      padding: 42px 28px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+    .glow.one{
+      background: var(--cyan);
+      top:-240px;
+      left:-240px;
+    }
+
+    .glow.two{
+      background: var(--magenta);
+      bottom:-260px;
+      right:-260px;
+      animation-delay: 1.3s;
+    }
+
+    @keyframes floatGlow{
+      0%,100%{ transform: translateY(0px) scale(1); }
+      50%{ transform: translateY(30px) scale(1.05); }
+    }
+
+    /* Mouse-follow glow */
+    .mouse-glow{
+      position:fixed;
+      width:520px;
+      height:520px;
+      border-radius:50%;
+      pointer-events:none;
+      z-index:1;
+      opacity:0.22;
+      filter: blur(80px);
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0,212,255,0.55) 0%, rgba(255,0,234,0.35) 40%, transparent 70%);
+      transition: opacity 0.25s ease;
+    }
+
+    .wrap{
+      position:relative;
+      z-index:2;
+      max-width:1060px;
+      margin:0 auto;
+      padding:44px 16px 70px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:3px;
+      line-height:1.1;
+    }
+
+    .brand .mini{
+      color:var(--muted2);
+      font-size:12px;
+      letter-spacing:0.42px;
+      text-transform:uppercase;
+    }
+
+    .brand .big{
+      font-weight:900;
+      font-size:18px;
+      letter-spacing:0.5px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid var(--stroke);
+      color:var(--muted);
+      font-size:13px;
+      user-select:none;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .dot{
+      width:9px;
+      height:9px;
+      border-radius:50%;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      box-shadow:0 0 14px rgba(0,212,255,0.55);
+      flex:0 0 auto;
+    }
+
+    .hero{
+      position:relative;
+      margin-top:16px;
+      border-radius:26px;
+      padding:48px 28px;
+      background: var(--card);
+      border:1px solid var(--stroke);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      animation: popIn 1s ease forwards;
-      overflow: hidden;
+      overflow:hidden;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.55);
+      animation: popIn 0.9s ease forwards;
     }
 
-    @keyframes popIn {
-      from { opacity: 0; transform: translateY(25px) scale(0.98); }
-      to { opacity: 1; transform: translateY(0px) scale(1); }
-    }
-
-    /* neon border effect */
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: 28px;
-      padding: 2px;
-      background: linear-gradient(90deg, #00d4ff, #ff00ea, #00d4ff);
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:28px;
+      padding:2px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--cyan));
       background-size: 300% 300%;
       animation: borderMove 4s linear infinite;
-      z-index: -1;
-      opacity: 0.9;
+      z-index:-1;
+      opacity:0.95;
     }
 
-    .card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 26px;
-      background: rgba(10, 10, 16, 0.78);
-      z-index: -1;
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:26px;
+      background: var(--card2);
+      z-index:-1;
     }
 
-    @keyframes borderMove {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+    @keyframes borderMove{
+      0%{ background-position:0% 50%; }
+      100%{ background-position:100% 50%; }
     }
 
-    /* profile image */
-    .profile-img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid rgba(255, 255, 255, 0.35);
-      box-shadow: 0 0 35px rgba(0, 212, 255, 0.35);
-      margin-bottom: 16px;
-      transition: 0.3s ease;
+    @keyframes popIn{
+      from{ opacity:0; transform: translateY(18px) scale(0.985); }
+      to{ opacity:1; transform: translateY(0px) scale(1); }
     }
 
-    .profile-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 55px rgba(255, 0, 234, 0.45);
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap:22px;
+      align-items:start;
     }
 
-    /* name */
-    h1 {
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      text-shadow: 0 0 22px rgba(0, 212, 255, 0.25);
+    h1{
+      font-size: clamp(34px, 4.8vw, 64px);
+      font-weight: 950;
+      letter-spacing: 0.9px;
+      line-height: 1.02;
+      margin-bottom: 10px;
+      text-shadow: 0 0 28px rgba(0, 212, 255, 0.16);
     }
 
-    /* tagline */
-    .subtitle {
-      font-size: 16px;
-      font-weight: 300;
-      opacity: 0.9;
-      margin-bottom: 18px;
-      color: rgba(255, 255, 255, 0.82);
+    .typing{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-top:8px;
+      margin-bottom:14px;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid var(--stroke2);
+      width: fit-content;
+      max-width: 100%;
+      overflow:hidden;
     }
 
-    /* role badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      font-weight: 600;
-      margin-bottom: 24px;
-      box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.05);
+    .typing .cursor{
+      width:10px;
+      height:18px;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      border-radius: 8px;
+      animation: blink 0.8s infinite;
+      flex:0 0 auto;
     }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, #00d4ff, #ff00ea);
-      box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    @keyframes blink{
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
     }
 
-    /* buttons */
-    .btns {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .btn {
-      cursor: pointer;
-      text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 14px;
-      font-weight: 600;
-      transition: 0.25s ease;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.06);
-      color: white;
-      min-width: 150px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-      background: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
-    }
-
-    .btn.primary {
-      background: linear-gradient(90deg, rgba(0, 212, 255, 0.85), rgba(255, 0, 234, 0.85));
-      border: none;
-      box-shadow: 0 12px 40px rgba(255, 0, 234, 0.18);
-    }
-
-    .btn.primary:hover {
-      box-shadow: 0 18px 60px rgba(0, 212, 255, 0.25);
-    }
-
-    /* footer */
-    .footer {
-      margin-top: 26px;
+    .typing .text{
+      color: rgba(255,255,255,0.86);
+      font-weight:700;
       font-size: 13px;
-      opacity: 0.65;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
 
-    /* small info strip */
-    .mini-info {
-      margin-top: 18px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      color: rgba(255, 255, 255, 0.78);
+    .sub{
+      max-width: 62ch;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid var(--stroke2);
+      font-weight:800;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .rightbox{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .stat{
+      padding:14px 14px;
+      border-radius:18px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid var(--stroke2);
+    }
+
+    .stat .label{
+      color: var(--muted2);
+      font-size: 12px;
+      margin-bottom: 4px;
+      letter-spacing:0.3px;
+      text-transform: uppercase;
+    }
+
+    .stat .value{
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--text);
+    }
+
+    .buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top: 20px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      text-decoration:none;
+      font-weight:800;
       font-size: 14px;
-      line-height: 1.6;
+      color: white;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,0.06);
+      transition: 0.25s ease;
+      min-width: 190px;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
-    @media (max-width: 480px) {
-      .card {
-        padding: 34px 18px;
-      }
-      .btn {
-        min-width: 100%;
-      }
+    .btn:hover{
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 16px 55px rgba(0,0,0,0.55);
+    }
+
+    .btn.primary{
+      border:none;
+      background: linear-gradient(90deg, rgba(0,212,255,0.92), rgba(255,0,234,0.92));
+      box-shadow: 0 14px 50px rgba(255,0,234,0.14);
+    }
+
+    .btn.primary:hover{
+      box-shadow: 0 18px 70px rgba(0,212,255,0.18);
+    }
+
+    .section{
+      margin-top: 18px;
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid var(--stroke2);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .section-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:12px;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2{
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.35px;
+    }
+
+    .section-title span{
+      color: var(--muted2);
+      font-size: 12px;
+    }
+
+    .linkgrid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .linkcard{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      padding:16px;
+      border-radius:18px;
+      border: 1px solid var(--stroke2);
+      background: rgba(255,255,255,0.05);
+      transition: 0.25s ease;
+    }
+
+    .linkcard:hover{
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.10);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.55);
+    }
+
+    .linkcard .small{
+      font-size:12px;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing:0.3px;
+    }
+
+    .linkcard a{
+      color: var(--text);
+      text-decoration:none;
+      font-weight:900;
+      font-size:14px;
+      word-break:break-word;
+    }
+
+    /* Scroll reveal */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.show{
+      opacity:1;
+      transform: translateY(0px);
+    }
+
+    .footer{
+      margin-top: 18px;
+      text-align:center;
+      color: var(--muted2);
+      font-size: 13px;
+      padding: 8px 0 0;
+    }
+
+    @media (max-width: 880px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .linkgrid{ grid-template-columns: 1fr; }
+      .btn{ min-width: 100%; }
     }
   </style>
 </head>
 
 <body>
+  <div class="grid-bg"></div>
   <div class="glow one"></div>
   <div class="glow two"></div>
+  <div class="mouse-glow" id="mouseGlow"></div>
 
-  <main class="card">
-    <!-- Profile Image -->
-    <img src="image1.png" alt="Sk Wasim" class="profile-img" />
+  <div class="wrap">
 
-    <!-- Name -->
-    <h1>Sk Wasim</h1>
+    <header class="topbar reveal">
+      <div class="brand">
+        <div class="mini">Profile</div>
+        <div class="big">Inbondz</div>
+      </div>
 
-    <!-- Subtitle -->
-    <p class="subtitle">Building bold ideas into real platforms 🚀</p>
+      <div class="pill">
+        <span class="dot"></span>
+        <span>Official Landing Page</span>
+      </div>
+    </header>
 
-    <!-- Badge -->
-    <div class="badge">
-      <span class="dot"></span>
-      <span>Co-Founder of <b>Inbondz</b></span>
-    </div>
+    <section class="hero reveal">
+      <div class="hero-grid">
 
-    <!-- Mini Info -->
-    <div class="mini-info">
-      I create modern digital experiences and powerful online platforms.<br />
-      Focused on growth, branding, and strong execution.
-    </div>
+        <div>
+          <h1>Sk Wasim</h1>
 
-    <!-- Buttons -->
-    <div class="btns">
-      <a class="btn primary" href="#" onclick="alert('Coming Soon 🚀')">Explore Inbondz</a>
-      <a class="btn" href="#" onclick="alert('Contact option coming soon ✅')">Contact Me</a>
-    </div>
+          <div class="typing">
+            <div class="cursor"></div>
+            <div class="text" id="typingText">Co-Founder of Inbondz</div>
+          </div>
 
-    <div class="footer">
-      © <span id="year"></span> Sk Wasim • Inbondz
-    </div>
-  </main>
+          <div class="badge">
+            <span class="dot"></span>
+            <span>Co-Founder of Inbondz</span>
+          </div>
+
+          <p class="sub" style="margin-top:14px;">
+            Building digital platforms with strong identity, structured execution, and clean growth strategy.
+          </p>
+
+          <div class="buttons">
+            <a class="btn primary" href="https://www.instagram.com/iminbz/" target="_blank" rel="noopener">
+              Instagram (Personal)
+            </a>
+
+            <a class="btn" href="https://www.instagram.com/inbondz/" target="_blank" rel="noopener">
+              Instagram (Business)
+            </a>
+
+            <a class="btn" href="https://x.com/skwasimx" target="_blank" rel="noopener">
+              X (Personal)
+            </a>
+
+            <a class="btn" href="https://x.com/inbondz" target="_blank" rel="noopener">
+              X (Business)
+            </a>
+          </div>
+        </div>
+
+        <div class="rightbox">
+          <div class="stat">
+            <div class="label">Instagram (Personal)</div>
+            <div class="value">@iminbz</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">Instagram (Business)</div>
+            <div class="value">@inbondz</div>
+          </div>
+
+          <div class="stat">
+            <div class="label">X Accounts</div>
+            <div class="value">@skwasimx • @inbondz</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="section reveal">
+        <div class="section-title">
+          <h2>Connected Profiles</h2>
+          <span>Official Accounts</span>
+        </div>
+
+        <div class="linkgrid">
+          <div class="linkcard">
+            <div class="small">Instagram (Personal)</div>
+            <a href="https://www.instagram.com/iminbz/" target="_blank" rel="noopener">@iminbz</a>
+          </div>
+
+          <div class="linkcard">
+            <div class="small">Instagram (Business)</div>
+            <a href="https://www.instagram.com/inbondz/" target="_blank" rel="noopener">@inbondz</a>
+          </div>
+
+          <div class="linkcard">
+            <div class="small">X (Personal)</div>
+            <a href="https://x.com/skwasimx" target="_blank" rel="noopener">@skwasimx</a>
+          </div>
+
+          <div class="linkcard">
+            <div class="small">X (Business)</div>
+            <a href="https://x.com/inbondz" target="_blank" rel="noopener">@inbondz</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer reveal">
+        © <span id="year"></span> Sk Wasim • Inbondz
+      </div>
+    </section>
+  </div>
 
   <script>
+    // Footer year
     document.getElementById("year").innerText = new Date().getFullYear();
+
+    // Typing effect
+    const phrases = [
+      "Co-Founder of Inbondz",
+      "Builder of Modern Platforms",
+      "Brand • Growth • Execution",
+      "Identity-Driven Strategy"
+    ];
+
+    let pIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingEl = document.getElementById("typingText");
+
+    function typeLoop() {
+      const current = phrases[pIndex];
+
+      if (!isDeleting) {
+        charIndex++;
+      } else {
+        charIndex--;
+      }
+
+      typingEl.textContent = current.substring(0, charIndex);
+
+      if (!isDeleting && charIndex === current.length) {
+        isDeleting = true;
+        setTimeout(typeLoop, 1100);
+        return;
+      }
+
+      if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        pIndex = (pIndex + 1) % phrases.length;
+      }
+
+      const speed = isDeleting ? 34 : 54;
+      setTimeout(typeLoop, speed);
+    }
+
+    typeLoop();
+
+    // Mouse follow glow
+    const mouseGlow = document.getElementById("mouseGlow");
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let glowX = mouseX;
+    let glowY = mouseY;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.08;
+      glowY += (mouseY - glowY) * 0.08;
+      mouseGlow.style.left = glowX + "px";
+      mouseGlow.style.top = glowY + "px";
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll(".reveal");
+
+    function handleReveal() {
+      revealEls.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const trigger = window.innerHeight * 0.90;
+        if (rect.top < trigger) el.classList.add("show");
+      });
+    }
+
+    window.addEventListener("scroll", handleReveal);
+    window.addEventListener("load", handleReveal);
+    handleReveal();
   </script>
 </body>
 </html>
