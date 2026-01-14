@@ -3,356 +3,285 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sk Wasim | Inbondz</title>
+  <title>Sk Wasim | Founder</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --bg:#07090f;
-      --card:#0d1220;
-      --card2:#0a0e18;
-      --stroke: rgba(255,255,255,0.10);
-
-      --text:#ffffff;
-      --muted: rgba(255,255,255,0.65);
-
-      --cyan:#00d4ff;
-      --magenta:#ff00ea;
+    :root {
+      --bg: #030303;
+      --card-bg: rgba(13, 13, 15, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --accent: #ffffff;
+      --accent-dim: #71717a;
+      --glow: rgba(0, 212, 255, 0.15);
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:"Poppins", sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Plus Jakarta Sans", sans-serif;
     }
 
-    body{
-      background: radial-gradient(circle at top, rgba(0,212,255,0.18), transparent 45%),
-                  radial-gradient(circle at bottom, rgba(255,0,234,0.15), transparent 45%),
-                  var(--bg);
-      color: var(--text);
-      min-height:100vh;
-      overflow-x:hidden;
+    body {
+      min-height: 100vh;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 0% 0%, rgba(63, 94, 251, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(252, 70, 107, 0.08) 0%, transparent 40%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: var(--accent);
+      overflow-x: hidden;
     }
 
-    .wrap{
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 50px 18px;
-    }
-
-    /* ===== HERO ===== */
-    .hero{
-      position: relative;
-      padding: 55px 28px;
-      border-radius: 28px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
-      border: 1px solid var(--stroke);
-      overflow: hidden;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.65);
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      border-radius:30px;
-      background: linear-gradient(90deg, rgba(0,212,255,0.55), rgba(255,0,234,0.55), rgba(0,212,255,0.55));
-      background-size: 300% 300%;
-      opacity: 0.9;
-      z-index: -2;
-      animation: moveBorder 5s linear infinite;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:28px;
-      background: rgba(10, 12, 18, 0.85);
+    /* Ambient background blur */
+    .blur-blob {
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: #4f46e5;
+      filter: blur(120px);
+      border-radius: 50%;
       z-index: -1;
+      opacity: 0.1;
+      animation: float 20s infinite alternate;
     }
 
-    @keyframes moveBorder{
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+    @keyframes float {
+      from { transform: translate(-20%, -20%); }
+      to { transform: translate(20%, 20%); }
     }
 
-    .hero h1{
-      font-size: clamp(36px, 5vw, 72px);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: 0.6px;
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
-    .hero h2{
-      margin-top: 12px;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.7;
-      max-width: 680px;
+    .hero-section {
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      margin-top: 22px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,0.04);
-      font-weight: 700;
+    .founder-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-dim);
+      margin-bottom: 24px;
       width: fit-content;
     }
 
-    .badge-dot{
-      width: 10px;
-      height: 10px;
+    .founder-tag span {
+      width: 6px;
+      height: 6px;
+      background: #10b981;
       border-radius: 50%;
-      background: linear-gradient(90deg, var(--cyan), var(--magenta));
-      box-shadow: 0 0 18px rgba(0,212,255,0.55);
+      box-shadow: 0 0 10px #10b981;
     }
 
-    /* ===== DOWN AREA ===== */
-    .down-area{
-      margin-top: 22px;
-      padding: 26px;
-      border-radius: 22px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--stroke);
-      box-shadow: 0 20px 70px rgba(0,0,0,0.55);
+    h1 {
+      font-size: 64px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 20px;
+      background: linear-gradient(to bottom, #fff 40%, rgba(255,255,255,0.5));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .down-title{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:12px;
-      margin-bottom: 14px;
-    }
-
-    .down-title h3{
+    .description {
       font-size: 16px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+      color: var(--accent-dim);
+      line-height: 1.6;
+      max-width: 400px;
     }
 
-    .down-title span{
-      font-size: 12px;
-      color: var(--muted);
+    .description strong {
+      color: var(--accent);
+      font-weight: 600;
     }
 
-    .social-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-
-    .social-card{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+    .links-section {
+      padding: 40px;
+      background: rgba(255,255,255,0.02);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
       gap: 12px;
+      justify-content: center;
+    }
 
-      padding: 16px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.10);
+    .link-card {
+      text-decoration: none;
+      color: var(--accent);
+      padding: 16px 20px;
       background: rgba(255,255,255,0.03);
-      text-decoration:none;
-      color: var(--text);
-
-      transition: 0.25s ease;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .social-card:hover{
-      transform: translateY(-3px);
-      background: rgba(255,255,255,0.08);
-      box-shadow: 0 18px 55px rgba(0,0,0,0.65);
+    .link-card:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateX(4px);
     }
 
-    .left{
-      display:flex;
-      align-items:center;
+    .link-info {
+      display: flex;
+      align-items: center;
       gap: 12px;
-      min-width: 0;
     }
 
-    .icon{
-      width: 38px;
-      height: 38px;
-      border-radius: 14px;
-      display:grid;
-      place-items:center;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.04);
-      flex: 0 0 auto;
+    .link-icon {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border-radius: 10px;
     }
 
-    .nameblock{
-      display:flex;
-      flex-direction:column;
-      gap:2px;
-      min-width:0;
+    .link-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: #000;
     }
 
-    .username{
-      font-weight: 800;
+    .link-text {
       font-size: 14px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-weight: 600;
     }
 
-    .platform{
+    .arrow {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+
+    .link-card:hover .arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    footer {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      text-align: center;
       font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
+      color: var(--accent-dim);
+      letter-spacing: 0.05em;
     }
 
-    .arrow{
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      flex: 0 0 auto;
-      user-select:none;
-    }
-
-    .footer{
-      margin-top: 22px;
-      text-align:center;
-      color: rgba(255,255,255,0.45);
-      font-size: 13px;
-    }
-
-    svg{
-      width: 20px;
-      height: 20px;
-      opacity: 0.92;
-    }
-
-    @media (max-width: 700px){
-      .social-grid{
+    @media (max-width: 850px) {
+      .container {
         grid-template-columns: 1fr;
+        margin-bottom: 40px;
       }
-      .hero{
-        padding: 44px 20px;
+      .hero-section {
+        padding: 40px 30px;
+        text-align: center;
+        align-items: center;
       }
-      .down-area{
-        padding: 20px;
+      .links-section {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 30px;
       }
+      h1 { font-size: 48px; }
     }
   </style>
 </head>
-
 <body>
-  <div class="wrap">
+  <div class="blur-blob"></div>
 
-    <section class="hero">
+  <main class="container">
+    <section class="hero-section">
+      <div class="founder-tag"><span></span> Available for Projects</div>
       <h1>Sk Wasim</h1>
-      <h2>
-        Co-Founder of Inbondz. Building strong digital identity, platforms, and next-level online presence.
-      </h2>
-
-      <div class="badge">
-        <div class="badge-dot"></div>
-        <div>Official Profile</div>
-      </div>
+      <p class="description">
+        Building the future of digital connection. <br>
+        Co-Founder of <strong>Inbondz</strong> & <strong>Insideout.bond</strong>.
+      </p>
     </section>
 
-    <section class="down-area">
-      <div class="down-title">
-        <h3>Connect</h3>
-        <span>Official Links</span>
-      </div>
-
-      <div class="social-grid">
-
-        <!-- Instagram @iminbz -->
-        <a class="social-card" href="https://www.instagram.com/iminbz/" target="_blank" rel="noopener">
-          <div class="left">
-            <div class="icon" aria-hidden="true">
-              <!-- Instagram icon -->
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6"/>
-                <path d="M12 16.2C14.3196 16.2 16.2 14.3196 16.2 12C16.2 9.6804 14.3196 7.8 12 7.8C9.6804 7.8 7.8 9.6804 7.8 12C7.8 14.3196 9.6804 16.2 12 16.2Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6"/>
-                <path d="M17.6 6.6H17.61" stroke="white" stroke-opacity="0.9" stroke-width="2.3" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="nameblock">
-              <div class="platform">Instagram</div>
-              <div class="username">@iminbz</div>
-            </div>
+    <section class="links-section">
+      <a href="https://www.instagram.com/iminbz/" class="link-card" target="_blank">
+        <div class="link-info">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204.012-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </div>
-          <div class="arrow">Open</div>
-        </a>
+          <span class="link-text">@iminbz</span>
+        </div>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
 
-        <!-- Instagram @inbondz -->
-        <a class="social-card" href="https://www.instagram.com/inbondz/" target="_blank" rel="noopener">
-          <div class="left">
-            <div class="icon" aria-hidden="true">
-              <!-- Instagram icon -->
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.8 2H16.2C19.4 2 22 4.6 22 7.8V16.2C22 19.4 19.4 22 16.2 22H7.8C4.6 22 2 19.4 2 16.2V7.8C2 4.6 4.6 2 7.8 2Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6"/>
-                <path d="M12 16.2C14.3196 16.2 16.2 14.3196 16.2 12C16.2 9.6804 14.3196 7.8 12 7.8C9.6804 7.8 7.8 9.6804 7.8 12C7.8 14.3196 9.6804 16.2 12 16.2Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6"/>
-                <path d="M17.6 6.6H17.61" stroke="white" stroke-opacity="0.9" stroke-width="2.3" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="nameblock">
-              <div class="platform">Instagram</div>
-              <div class="username">@inbondz</div>
-            </div>
+      <a href="https://www.instagram.com/inbondz/" class="link-card" target="_blank">
+        <div class="link-info">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204.012-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </div>
-          <div class="arrow">Open</div>
-        </a>
+          <span class="link-text">@inbondz</span>
+        </div>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
 
-        <!-- X @skwasimx -->
-        <a class="social-card" href="https://x.com/skwasimx" target="_blank" rel="noopener">
-          <div class="left">
-            <div class="icon" aria-hidden="true">
-              <!-- X icon -->
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.9 3H21L14.2 10.7L22 21H15.8L10.9 14.6L5.2 21H2L9.4 12.5L2 3H8.3L12.8 9L17.9 3Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="nameblock">
-              <div class="platform">X</div>
-              <div class="username">@skwasimx</div>
-            </div>
+      <a href="https://x.com/skwasimx" class="link-card" target="_blank">
+        <div class="link-info">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </div>
-          <div class="arrow">Open</div>
-        </a>
+          <span class="link-text">@skwasimx</span>
+        </div>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
 
-        <!-- X @inbondz -->
-        <a class="social-card" href="https://x.com/inbondz" target="_blank" rel="noopener">
-          <div class="left">
-            <div class="icon" aria-hidden="true">
-              <!-- X icon -->
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M17.9 3H21L14.2 10.7L22 21H15.8L10.9 14.6L5.2 21H2L9.4 12.5L2 3H8.3L12.8 9L17.9 3Z" stroke="white" stroke-opacity="0.9" stroke-width="1.6" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="nameblock">
-              <div class="platform">X</div>
-              <div class="username">@inbondz</div>
-            </div>
+      <a href="https://x.com/inbondz" class="link-card" target="_blank">
+        <div class="link-info">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </div>
-          <div class="arrow">Open</div>
-        </a>
-
-      </div>
-
-      <div class="footer">
-        © <span id="year"></span> Sk Wasim • Inbondz
-      </div>
+          <span class="link-text">@inbondz</span>
+        </div>
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+      </a>
     </section>
 
-  </div>
+    <footer>
+      &copy; <span id="year"></span> Sk Wasim &bull; Built to scale
+    </footer>
+  </main>
 
   <script>
     document.getElementById("year").innerText = new Date().getFullYear();
