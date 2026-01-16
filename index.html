@@ -88,7 +88,7 @@
             z-index: 10;
         }
 
-        /* Hero Section: Keeps Full Height */
+        /* Hero Section: Full Screen */
         .hero-section {
             min-height: 100vh;
             display: flex;
@@ -97,11 +97,12 @@
             align-items: center;
             padding: 20px;
             text-align: center;
+            position: relative; /* Essential for scroll indicator positioning */
         }
 
-        /* Content Sections: Tighter Spacing */
+        /* Content Sections */
         .content-section {
-            padding: 40px 20px; /* Reduced gap */
+            padding: 40px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -149,6 +150,7 @@
             margin-bottom: 40px;
         }
 
+        /* Scroll Indicator (Only in Hero) */
         .scroll-indicator {
             position: absolute;
             bottom: 40px;
@@ -164,7 +166,7 @@
             font-size: 2rem;
             margin-bottom: 25px;
             font-weight: 700;
-            align-self: flex-start; /* Aligns title to left for better reading flow */
+            /* REMOVED align-self: flex-start to center it */
         }
 
         /* Grid for Expertise */
@@ -335,6 +337,7 @@
             const overlay = document.getElementById('start-overlay');
             const audio = document.getElementById('bgMusic');
             
+            // Cinematic Slide Up
             overlay.style.transform = 'translateY(-100%)';
 
             audio.volume = 0.5;
