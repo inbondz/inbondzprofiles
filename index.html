@@ -1,8 +1,8 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sk Wasim | Inbondz</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700;900&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
@@ -20,17 +20,47 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
+        html, body {
+            width: 100%;
+            overflow-x: hidden; /* Stops left-right scroll */
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Outfit', sans-serif;
-            overflow-x: hidden;
-            perspective: 1000px; /* Needed for 3D rotation */
         }
 
-        /* --- DYNAMIC 3D 'W' BACKGROUND --- */
+        /* --- CLICK TO ENTER OVERLAY --- */
+        #start-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* Cinematic Slide Up */
+        }
+        
+        /* The "Shivering" Pulse Text */
+        #start-overlay h2 {
+            font-weight: 300;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #fff;
+            animation: shiverPulse 2s infinite;
+        }
+
+        @keyframes shiverPulse {
+            0% { opacity: 0.3; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 0.3; transform: scale(0.98); }
+        }
+
+        /* --- ROTATING 'W' BACKGROUND --- */
         .watermark {
             position: fixed;
             top: 50%;
@@ -42,34 +72,13 @@
             z-index: -1;
             pointer-events: none;
             line-height: 0;
-            /* The Animation */
             animation: floatRotate 20s infinite ease-in-out alternate;
+            white-space: nowrap;
         }
 
         @keyframes floatRotate {
             0% { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1); }
-            50% { transform: translate(-50%, -50%) rotateX(10deg) rotateY(-5deg) scale(1.05); }
-            100% { transform: translate(-50%, -50%) rotateX(-5deg) rotateY(5deg) scale(1); }
-        }
-
-        /* --- CLICK TO START OVERLAY --- */
-        #start-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: opacity 0.8s ease;
-        }
-        #start-overlay h2 {
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-size: 1rem;
-            text-transform: uppercase;
-            animation: pulse 2s infinite;
+            100% { transform: translate(-50%, -50%) rotateX(10deg) rotateY(-5deg) scale(1.05); }
         }
 
         /* --- SECTIONS --- */
@@ -79,17 +88,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             position: relative;
-            max-width: 800px;
+            max-width: 600px;
             margin: 0 auto;
             text-align: center;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
         }
         .reveal.active {
             opacity: 1;
@@ -98,12 +107,12 @@
 
         /* --- HERO --- */
         .profile-wrapper {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            padding: 4px;
+            padding: 3px;
             background: linear-gradient(135deg, #fff, #333);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .profile-img {
             width: 100%; height: 100%;
@@ -113,7 +122,7 @@
         }
         
         h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 900;
             letter-spacing: -1px;
             margin-bottom: 10px;
@@ -121,111 +130,92 @@
         }
         
         .hero-role {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #888;
             font-weight: 300;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
-            font-size: 0.8rem;
+            bottom: 30px;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             opacity: 0.5;
             animation: bounce 2s infinite;
         }
 
-        /* --- SKILLS GRID --- */
-        .skills-grid {
+        /* --- GRID STYLES (Expertise) --- */
+        .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: 1fr;
+            gap: 15px;
             width: 100%;
-            margin-top: 40px;
+            margin-top: 30px;
+        }
+        @media(min-width: 600px) {
+            .grid-container { grid-template-columns: 1fr 1fr; }
         }
 
-        .skill-card {
+        .card-box {
             background: var(--glass);
             border: 1px solid var(--border);
             padding: 25px;
             text-align: left;
-            border-radius: 12px;
+            border-radius: 16px;
             transition: 0.3s;
         }
-        .skill-card:hover {
-            border-color: #fff;
-            transform: translateY(-5px);
+        /* Desktop Hover only */
+        @media(hover: hover) {
+            .card-box:hover {
+                border-color: rgba(255,255,255,0.3);
+                transform: translateY(-5px);
+            }
         }
-        .skill-card h3 {
+
+        .card-box h3 {
             font-size: 1.1rem;
             margin-bottom: 5px;
             color: #fff;
         }
-        .skill-card p {
+        .card-box p {
             font-size: 0.85rem;
             color: #888;
         }
 
-        /* --- CONNECT & SOCIAL BUTTONS --- */
-        .social-container {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .social-btn {
+        /* --- BUTTON LINKS (Connect & Services) --- */
+        .btn-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: var(--glass);
             border: 1px solid var(--border);
-            padding: 20px 30px;
+            padding: 18px 25px;
             text-decoration: none;
             color: #fff;
-            border-radius: 100px;
-            transition: 0.4s;
+            border-radius: 12px;
+            transition: 0.2s;
             font-weight: 500;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        .btn-link:active {
+            transform: scale(0.98);
         }
 
-        .social-btn:hover {
-            background: #fff;
-            color: #000;
-            transform: scale(1.02);
+        .btn-left { display: flex; align-items: center; gap: 15px; }
+        .btn-link i { font-size: 1.3rem; width: 25px; text-align: center; }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
-        .social-left { display: flex; align-items: center; gap: 15px; }
-        .social-btn i { font-size: 1.4rem; width: 25px; text-align: center; }
-        
-        /* Custom Favicon Image Styling */
-        .custom-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
-            object-fit: contain;
-            filter: grayscale(100%) brightness(200%); /* Makes it look white/monochrome to match theme */
-            transition: 0.4s;
-        }
-        .social-btn:hover .custom-icon {
-            filter: none; /* Shows original color on hover */
-        }
-
-        /* --- ANIMATIONS --- */
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-        @keyframes pulse {
-            0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; }
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; }
-            .watermark { font-size: 120vw; }
-            section { min-height: auto; padding: 60px 20px; }
+            0%, 100% {transform: translateY(0);}
+            50% {transform: translateY(-8px);}
         }
     </style>
 </head>
@@ -248,21 +238,21 @@
     </section>
 
     <section>
-        <h2 class="reveal" style="font-size: 2rem; margin-bottom: 20px;">Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-card reveal">
+        <h2 class="section-title reveal">Expertise</h2>
+        <div class="grid-container">
+            <div class="card-box reveal">
                 <h3>Master Storyteller</h3>
                 <p>Crafting narratives that drive action.</p>
             </div>
-            <div class="skill-card reveal">
+            <div class="card-box reveal">
                 <h3>Server Architect</h3>
                 <p>Nginx, AWS, High-Scale Infrastructure.</p>
             </div>
-            <div class="skill-card reveal">
+            <div class="card-box reveal">
                 <h3>Persuasion & Leadership</h3>
                 <p>Building teams and influencing markets.</p>
             </div>
-            <div class="skill-card reveal">
+            <div class="card-box reveal">
                 <h3>Sales Strategist</h3>
                 <p>High-ticket closing & pipeline architecture.</p>
             </div>
@@ -270,36 +260,42 @@
     </section>
 
     <section>
-        <h2 class="reveal" style="font-size: 2rem; margin-bottom: 30px;">Connect</h2>
-        
-        <div class="social-container reveal">
-            <a href="https://x.com/skwasimx" target="_blank" class="social-btn">
-                <div class="social-left"><i class="fa-brands fa-x-twitter"></i> <span>Sk Wasim</span></div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-            <a href="https://instagram.com/iminbz" target="_blank" class="social-btn">
-                <div class="social-left"><i class="fa-brands fa-instagram"></i> <span>@iminbz</span></div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-            <a href="https://x.com/inbondz" target="_blank" class="social-btn">
-                <div class="social-left"><i class="fa-brands fa-x-twitter"></i> <span>Inbondz</span></div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-            <a href="https://instagram.com/inbondz" target="_blank" class="social-btn">
-                <div class="social-left"><i class="fa-brands fa-instagram"></i> <span>@inbondz</span></div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
-            <a href="https://insideout.bond" target="_blank" class="social-btn">
-                <div class="social-left">
-                    <img src="https://www.google.com/s2/favicons?domain=insideout.bond&sz=64" class="custom-icon" alt="IO">
-                    <span>Insideout.bond</span>
+        <h2 class="section-title reveal">Services</h2>
+        <div style="width: 100%; margin-top: 20px;">
+            <a href="https://insideout.bond" target="_blank" class="btn-link reveal">
+                <div class="btn-left">
+                    <i class="fa-solid fa-layer-group"></i> 
+                    <span>Tools Website</span>
                 </div>
-                <i class="fa-solid fa-arrow-right"></i>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
             </a>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title reveal">Connect</h2>
+        <div style="width: 100%; margin-top: 20px;">
+            
+            <a href="https://x.com/skwasimx" target="_blank" class="btn-link reveal">
+                <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Sk Wasim</span></div>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+            </a>
+
+            <a href="https://instagram.com/iminbz" target="_blank" class="btn-link reveal">
+                <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@iminbz</span></div>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+            </a>
+
+            <a href="https://x.com/inbondz" target="_blank" class="btn-link reveal">
+                <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Inbondz</span></div>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+            </a>
+
+            <a href="https://instagram.com/inbondz" target="_blank" class="btn-link reveal">
+                <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@inbondz</span></div>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+            </a>
+
         </div>
     </section>
 
@@ -308,14 +304,14 @@
     </audio>
 
     <script>
-        // SCROLL REVEAL
+        // 1. SCROLL REVEAL
         window.addEventListener('scroll', reveal);
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+                var elementVisible = 50;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
                 }
@@ -323,16 +319,15 @@
         }
         reveal();
 
-        // START EXPERIENCE
+        // 2. TAP TO ENTER EXPERIENCE
         function startExperience() {
             const overlay = document.getElementById('start-overlay');
             const audio = document.getElementById('bgMusic');
             
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-            }, 800);
+            // Slide UP animation (transform)
+            overlay.style.transform = 'translateY(-100%)';
 
+            // Play Audio
             audio.volume = 0.5;
             audio.play().catch(e => console.log(e));
         }
