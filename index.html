@@ -25,7 +25,7 @@
 
         html, body {
             width: 100%;
-            overflow-x: hidden; /* Stops left-right scroll */
+            overflow-x: hidden;
             background-color: var(--bg);
             color: var(--text);
             font-family: 'Outfit', sans-serif;
@@ -41,10 +41,9 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1); /* Cinematic Slide Up */
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
         }
         
-        /* The "Shivering" Pulse Text */
         #start-overlay h2 {
             font-weight: 300;
             letter-spacing: 4px;
@@ -81,31 +80,45 @@
             100% { transform: translate(-50%, -50%) rotateX(10deg) rotateY(-5deg) scale(1.05); }
         }
 
-        /* --- SECTIONS --- */
-        section {
-            min-height: 80vh;
+        /* --- LAYOUT CONFIGURATION --- */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Hero Section: Keeps Full Height */
+        .hero-section {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 60px 20px;
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Content Sections: Tighter Spacing */
+        .content-section {
+            padding: 40px 20px; /* Reduced gap */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s ease;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* --- HERO --- */
+        /* --- HERO STYLES --- */
         .profile-wrapper {
             width: 150px;
             height: 150px;
@@ -138,7 +151,7 @@
 
         .scroll-indicator {
             position: absolute;
-            bottom: 30px;
+            bottom: 40px;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -146,13 +159,20 @@
             animation: bounce 2s infinite;
         }
 
-        /* --- GRID STYLES (Expertise) --- */
+        /* --- CARDS & BUTTONS --- */
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            align-self: flex-start; /* Aligns title to left for better reading flow */
+        }
+
+        /* Grid for Expertise */
         .grid-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 15px;
             width: 100%;
-            margin-top: 30px;
         }
         @media(min-width: 600px) {
             .grid-container { grid-template-columns: 1fr 1fr; }
@@ -166,14 +186,7 @@
             border-radius: 16px;
             transition: 0.3s;
         }
-        /* Desktop Hover only */
-        @media(hover: hover) {
-            .card-box:hover {
-                border-color: rgba(255,255,255,0.3);
-                transform: translateY(-5px);
-            }
-        }
-
+        
         .card-box h3 {
             font-size: 1.1rem;
             margin-bottom: 5px;
@@ -184,7 +197,7 @@
             color: #888;
         }
 
-        /* --- BUTTON LINKS (Connect & Services) --- */
+        /* Button Links */
         .btn-link {
             display: flex;
             align-items: center;
@@ -197,7 +210,7 @@
             border-radius: 12px;
             transition: 0.2s;
             font-weight: 500;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             width: 100%;
         }
         .btn-link:active {
@@ -206,12 +219,6 @@
 
         .btn-left { display: flex; align-items: center; gap: 15px; }
         .btn-link i { font-size: 1.3rem; width: 25px; text-align: center; }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
 
         @keyframes bounce {
             0%, 100% {transform: translateY(0);}
@@ -227,84 +234,88 @@
 
     <div class="watermark">W</div>
 
-    <section>
-        <div class="profile-wrapper reveal">
-            <img src="https://unavatar.io/twitter/skwasimx" alt="Sk Wasim" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=SW&background=333&color=fff'">
-        </div>
-        <h1 class="reveal">Sk Wasim</h1>
-        <div class="hero-role reveal">Co-Founder of Inbondz & Insideout.bond</div>
+    <div class="container">
         
-        <div class="scroll-indicator">Scroll Down</div>
-    </section>
-
-    <section>
-        <h2 class="section-title reveal">Expertise</h2>
-        <div class="grid-container">
-            <div class="card-box reveal">
-                <h3>Master Storyteller</h3>
-                <p>Crafting narratives that drive action.</p>
+        <div class="hero-section">
+            <div class="profile-wrapper reveal">
+                <img src="https://unavatar.io/twitter/skwasimx" alt="Sk Wasim" class="profile-img" onerror="this.src='https://ui-avatars.com/api/?name=SW&background=333&color=fff'">
             </div>
-            <div class="card-box reveal">
-                <h3>Server Architect</h3>
-                <p>Nginx, AWS, High-Scale Infrastructure.</p>
-            </div>
-            <div class="card-box reveal">
-                <h3>Persuasion & Leadership</h3>
-                <p>Building teams and influencing markets.</p>
-            </div>
-            <div class="card-box reveal">
-                <h3>Sales Strategist</h3>
-                <p>High-ticket closing & pipeline architecture.</p>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <h2 class="section-title reveal">Services</h2>
-        <div style="width: 100%; margin-top: 20px;">
-            <a href="https://insideout.bond" target="_blank" class="btn-link reveal">
-                <div class="btn-left">
-                    <i class="fa-solid fa-layer-group"></i> 
-                    <span>Tools Website</span>
-                </div>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
-        </div>
-    </section>
-
-    <section>
-        <h2 class="section-title reveal">Connect</h2>
-        <div style="width: 100%; margin-top: 20px;">
+            <h1 class="reveal">Sk Wasim</h1>
+            <div class="hero-role reveal">Co-Founder of Inbondz & Insideout.bond</div>
             
-            <a href="https://x.com/skwasimx" target="_blank" class="btn-link reveal">
-                <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Sk Wasim</span></div>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
-
-            <a href="https://instagram.com/iminbz" target="_blank" class="btn-link reveal">
-                <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@iminbz</span></div>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
-
-            <a href="https://x.com/inbondz" target="_blank" class="btn-link reveal">
-                <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Inbondz</span></div>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
-
-            <a href="https://instagram.com/inbondz" target="_blank" class="btn-link reveal">
-                <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@inbondz</span></div>
-                <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
-            </a>
-
+            <div class="scroll-indicator">Scroll Down</div>
         </div>
-    </section>
+
+        <div class="content-section">
+            <h2 class="section-title reveal">Expertise</h2>
+            <div class="grid-container">
+                <div class="card-box reveal">
+                    <h3>Master Storyteller</h3>
+                    <p>Crafting narratives that drive action.</p>
+                </div>
+                <div class="card-box reveal">
+                    <h3>Server Architect</h3>
+                    <p>Nginx, AWS, High-Scale Infrastructure.</p>
+                </div>
+                <div class="card-box reveal">
+                    <h3>Persuasion & Leadership</h3>
+                    <p>Building teams and influencing markets.</p>
+                </div>
+                <div class="card-box reveal">
+                    <h3>Sales Strategist</h3>
+                    <p>High-ticket closing & pipeline architecture.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title reveal">Services</h2>
+            <div style="width: 100%;">
+                <a href="https://insideout.bond" target="_blank" class="btn-link reveal">
+                    <div class="btn-left">
+                        <i class="fa-solid fa-layer-group"></i> 
+                        <span>Tools Website</span>
+                    </div>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="content-section" style="padding-bottom: 100px;">
+            <h2 class="section-title reveal">Connect</h2>
+            <div style="width: 100%;">
+                
+                <a href="https://x.com/skwasimx" target="_blank" class="btn-link reveal">
+                    <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Sk Wasim</span></div>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+
+                <a href="https://instagram.com/iminbz" target="_blank" class="btn-link reveal">
+                    <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@iminbz</span></div>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+
+                <a href="https://x.com/inbondz" target="_blank" class="btn-link reveal">
+                    <div class="btn-left"><i class="fa-brands fa-x-twitter"></i> <span>Inbondz</span></div>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+
+                <a href="https://instagram.com/inbondz" target="_blank" class="btn-link reveal">
+                    <div class="btn-left"><i class="fa-brands fa-instagram"></i> <span>@inbondz</span></div>
+                    <i class="fa-solid fa-arrow-right" style="font-size: 0.9rem;"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
 
     <audio id="bgMusic" loop>
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // 1. SCROLL REVEAL
+        // SCROLL REVEAL
         window.addEventListener('scroll', reveal);
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
@@ -319,15 +330,13 @@
         }
         reveal();
 
-        // 2. TAP TO ENTER EXPERIENCE
+        // TAP TO ENTER
         function startExperience() {
             const overlay = document.getElementById('start-overlay');
             const audio = document.getElementById('bgMusic');
             
-            // Slide UP animation (transform)
             overlay.style.transform = 'translateY(-100%)';
 
-            // Play Audio
             audio.volume = 0.5;
             audio.play().catch(e => console.log(e));
         }
