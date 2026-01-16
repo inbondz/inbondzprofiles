@@ -1,290 +1,332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sk Wasim | Founder</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sk Wasim | Inbondz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-color: #ffffff;
+            --accent-color: #00d2ff; /* Cyber blue accent */
+            --secondary-text: #a0a0a0;
+        }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    :root {
-      --bg: #030303;
-      --card-bg: rgba(13, 13, 15, 0.7);
-      --border: rgba(255, 255, 255, 0.08);
-      --accent: #ffffff;
-      --accent-dim: #71717a;
-      --glow: rgba(0, 212, 255, 0.15);
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Plus Jakarta Sans", sans-serif;
-    }
+        /* The Giant 'W' Background */
+        .background-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80vh;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: -1;
+            user-select: none;
+            pointer-events: none;
+        }
 
-    body {
-      min-height: 100vh;
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 0% 0%, rgba(63, 94, 251, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(252, 70, 107, 0.08) 0%, transparent 40%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      color: var(--accent);
-      overflow-x: hidden;
-    }
+        /* Glassmorphism Card */
+        .profile-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeIn 1s ease-out;
+        }
 
-    /* Ambient background blur */
-    .blur-blob {
-      position: fixed;
-      width: 400px;
-      height: 400px;
-      background: #4f46e5;
-      filter: blur(120px);
-      border-radius: 50%;
-      z-index: -1;
-      opacity: 0.1;
-      animation: float 20s infinite alternate;
-    }
+        /* Profile Image */
+        .profile-img-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #ff00cc, #333399); /* Instagram-ish gradient border */
+            overflow: hidden;
+        }
 
-    @keyframes float {
-      from { transform: translate(-20%, -20%); }
-      to { transform: translate(20%, 20%); }
-    }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg-color);
+        }
 
-    .container {
-      width: 100%;
-      max-width: 900px;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 32px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      position: relative;
-    }
+        /* Text Styling */
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
 
-    .hero-section {
-      padding: 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
 
-    .founder-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent-dim);
-      margin-bottom: 24px;
-      width: fit-content;
-    }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
 
-    .founder-tag span {
-      width: 6px;
-      height: 6px;
-      background: #10b981;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #10b981;
-    }
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            color: var(--secondary-text);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
 
-    h1 {
-      font-size: 64px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 20px;
-      background: linear-gradient(to bottom, #fff 40%, rgba(255,255,255,0.5));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+        .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
 
-    .description {
-      font-size: 16px;
-      color: var(--accent-dim);
-      line-height: 1.6;
-      max-width: 400px;
-    }
+        /* Social Links Grid */
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
 
-    .description strong {
-      color: var(--accent);
-      font-weight: 600;
-    }
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
 
-    .links-section {
-      padding: 40px;
-      background: rgba(255,255,255,0.02);
-      border-left: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      justify-content: center;
-    }
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+        }
 
-    .link-card {
-      text-decoration: none;
-      color: var(--accent);
-      padding: 16px 20px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+        .social-btn i {
+            font-size: 1.2rem;
+        }
 
-    .link-card:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateX(4px);
-    }
+        /* Audio Player Styling */
+        .audio-player {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
 
-    .link-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+        .play-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+        }
 
-    .link-icon {
-      width: 32px;
-      height: 32px;
-      display: grid;
-      place-items: center;
-      background: #fff;
-      border-radius: 10px;
-    }
+        .play-btn:hover {
+            color: var(--accent-color);
+        }
 
-    .link-icon svg {
-      width: 18px;
-      height: 18px;
-      fill: #000;
-    }
+        .song-info {
+            flex-grow: 1;
+            text-align: left;
+            overflow: hidden;
+        }
 
-    .link-text {
-      font-size: 14px;
-      font-weight: 600;
-    }
+        .song-title {
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-weight: 600;
+        }
 
-    .arrow {
-      opacity: 0;
-      transform: translateX(-10px);
-      transition: all 0.3s ease;
-    }
+        .song-artist {
+            font-size: 0.7rem;
+            color: var(--secondary-text);
+        }
 
-    .link-card:hover .arrow {
-      opacity: 1;
-      transform: translateX(0);
-    }
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-    footer {
-      position: absolute;
-      bottom: -40px;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      font-size: 12px;
-      color: var(--accent-dim);
-      letter-spacing: 0.05em;
-    }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 60px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            outline: none;
+        }
 
-    @media (max-width: 850px) {
-      .container {
-        grid-template-columns: 1fr;
-        margin-bottom: 40px;
-      }
-      .hero-section {
-        padding: 40px 30px;
-        text-align: center;
-        align-items: center;
-      }
-      .links-section {
-        border-left: none;
-        border-top: 1px solid var(--border);
-        padding: 30px;
-      }
-      h1 { font-size: 48px; }
-    }
-  </style>
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Adjustment */
+        @media (max-width: 480px) {
+            .background-watermark {
+                font-size: 50vh;
+            }
+            .profile-card {
+                width: 95%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="blur-blob"></div>
 
-  <main class="container">
-    <section class="hero-section">
-      <div class="founder-tag"><span></span> Available for Projects</div>
-      <h1>Sk Wasim</h1>
-      <p class="description">
-        Building the future of digital connection. <br>
-        Co-Founder of <strong>Inbondz</strong> & <strong>Insideout.bond</strong>.
-      </p>
-    </section>
+    <div class="background-watermark">W</div>
 
-    <section class="links-section">
-      <a href="https://www.instagram.com/iminbz/" class="link-card" target="_blank">
-        <div class="link-info">
-          <div class="link-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204.012-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </div>
-          <span class="link-text">@iminbz</span>
+    <div class="profile-card">
+        <div class="profile-img-container">
+            <img src="https://unavatar.io/twitter/skwasimx" alt="Sk Wasim" class="profile-img" onerror="this.src='https://via.placeholder.com/150'">
         </div>
-        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </a>
 
-      <a href="https://www.instagram.com/inbondz/" class="link-card" target="_blank">
-        <div class="link-info">
-          <div class="link-icon">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.848 0-3.204.012-3.584.07-4.849.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-          </div>
-          <span class="link-text">@inbondz</span>
+        <h1>Sk Wasim</h1>
+        <div class="subtitle">Co-Founder of Inbondz & Insideout.bond</div>
+
+        <div class="skills-container">
+            <span class="skill-tag">Master Storyteller</span>
+            <span class="skill-tag">Server Architect (Nginx, AWS)</span>
+            <span class="skill-tag">Persuasion & Leadership</span>
+            <span class="skill-tag">Sales Strategist</span>
         </div>
-        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </a>
 
-      <a href="https://x.com/skwasimx" class="link-card" target="_blank">
-        <div class="link-info">
-          <div class="link-icon">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
-          <span class="link-text">@skwasimx</span>
+        <div class="social-links">
+            <a href="https://x.com/skwasimx" target="_blank" class="social-btn">
+                <i class="fa-brands fa-x-twitter"></i> Sk Wasim
+            </a>
+            
+            <a href="https://instagram.com/iminbz" target="_blank" class="social-btn">
+                <i class="fa-brands fa-instagram"></i> Sk Wasim
+            </a>
+
+            <a href="https://x.com/inbondz" target="_blank" class="social-btn">
+                <i class="fa-brands fa-x-twitter"></i> Inbondz
+            </a>
+
+            <a href="https://instagram.com/inbondz" target="_blank" class="social-btn">
+                <i class="fa-brands fa-instagram"></i> Inbondz
+            </a>
         </div>
-        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </a>
 
-      <a href="https://x.com/inbondz" class="link-card" target="_blank">
-        <div class="link-info">
-          <div class="link-icon">
-            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
-          <span class="link-text">@inbondz</span>
+        <div class="audio-player">
+            <button id="playBtn" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <div class="song-info">
+                <div class="song-title">Hips Don't Lie</div>
+                <div class="song-artist">Shakira ft. Wyclef Jean</div>
+            </div>
+            <div class="volume-container">
+                <i class="fa-solid fa-volume-low" style="font-size: 0.8rem; color: #aaa;"></i>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+            </div>
         </div>
-        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-      </a>
-    </section>
 
-    <footer>
-      &copy; <span id="year"></span> Sk Wasim &bull; Built to scale
-    </footer>
-  </main>
+        <audio id="audio" src="song.mp3" loop></audio>
+    </div>
 
-  <script>
-    document.getElementById("year").innerText = new Date().getFullYear();
-  </script>
+    <script>
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('playBtn');
+        const icon = playBtn.querySelector('i');
+        const volumeSlider = document.getElementById('volumeSlider');
+
+        // Toggle Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    icon.classList.remove('fa-play');
+                    icon.classList.add('fa-pause');
+                }).catch(error => {
+                    console.log("Audio play failed. Make sure 'song.mp3' exists.", error);
+                    alert("Please ensure 'song.mp3' is in the folder!");
+                });
+            } else {
+                audio.pause();
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+            }
+        });
+
+        // Volume Control
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value;
+        });
+
+        // Auto-set volume on load
+        audio.volume = 0.5;
+    </script>
 </body>
 </html>
